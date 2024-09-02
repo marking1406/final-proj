@@ -1,0 +1,42 @@
+.profDropDown {
+    position: relative;
+  }
+  
+  .dropDown-menu {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 90px;
+    top: 0px;
+    list-style: none;
+    /* margin:10px 5px 0px 0px; */
+    border: none;   
+  }
+  
+  .dropDown-menu li {
+    cursor: pointer;
+    background-color: rgb(176, 52, 41);
+    padding: 8px 0; 
+    transition: background-color 0.3s; 
+  }
+
+/* .dropDown-menu li:hover {
+     margin-right: 5px;
+      background: rgba(64, 56, 56, 0.37); 
+  } */
+  
+  .dropDown-menu.clicked {
+    display: flex;
+  }
+  
+  .dropDown-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: white;
+    padding: 10px 0; 
+    box-sizing: border-box; 
+  }
+
