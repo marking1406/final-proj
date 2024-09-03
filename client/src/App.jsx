@@ -1,11 +1,9 @@
-import { useState } from 'react'
-
+import Homepg from './pages/Homepg';
 
 function App() {
 
 
   return (
-<div className='text-blue-700'> free playstation</div>
   )
 }
 
