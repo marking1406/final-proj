@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function SignUp() {
+export default function NewAd() {
   return (
     <div>
-      <h1>i am SignUp</h1>
+      <h1>add new ad</h1>
     </div>
   )
 }
