@@ -2,6 +2,7 @@ import './NavBar.css';
 import ProfDropDown from './ProfDropDown';
 import logo from '../../assets/img/2.png';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Link, NavLink } from 'react-router-dom';
 import { useState } from 'react';
 
@@ -48,8 +49,8 @@ export default function Navbar() {
         <li>
           <NavLink to='/SignUp'>SignUp</NavLink>
         </li>
-        <li onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} >
-          <NavLink to='/Profile'>Profile<ArrowDropDownIcon/></NavLink>
+        <li onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} style={{width:'80px',textAlign:'center'}}>
+          <NavLink to='/Profile'><AccountCircleIcon/></NavLink>
           {dropDown && <ProfDropDown/>}
         </li>
       </ul>

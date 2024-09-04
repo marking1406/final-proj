@@ -1,0 +1,4 @@
+-- DROP DATABASE IMY2;
+CREATE DATABASE IMY2; 
+COLLATE = 'utf8mb4_general_ci';
+USE `IMY2`;
