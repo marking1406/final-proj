@@ -4,7 +4,7 @@ import NavBar from './components/NavBar/Navbar.jsx';
 import HomePage from './pages/Homepg.jsx';
 import Vehicle from './pages/Vehicle.jsx';
 import RealEstate from './pages/RealEstate.jsx'
-import Furniture from './pages/Furniture.jsx'
+import Furniture from './pages/Furniture.jsx';
 import SignUp from './pages/SignUp.jsx';
 import Profile from './components/Profile/Profile.jsx'
 import NewAd from "./components/Profile/NewAd.jsx";
