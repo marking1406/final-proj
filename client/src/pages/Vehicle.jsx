@@ -145,8 +145,8 @@ const Cars = () => {
         </div>
         <button
           onClick={handleResetFilters}
-          className="w-1/5 p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-        >
+          className="w-1/5 p-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+        >            
           All Options
         </button>
       </div>
