@@ -1,8 +1,8 @@
 import React from "react";
-import pc from "../../assets/img/pcImg.png";
-import businessIcon from "../../assets/img/buisnessIcon.png";
-import carIcon from "../../assets/img/carIcon.png";
-import animalIcon from "../../assets/img/animalIcon.png";
+import pc from "../assets/img/pcImg.png";
+import businessIcon from "../assets/img/buisnessIcon.png";
+import carIcon from "../assets/img/carIcon.png";
+import animalIcon from "../assets/img/animalIcon.png";
 
 function Homepg() {
   const categories = [
