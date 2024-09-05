@@ -1,3 +1,6 @@
+USE imy2;
+DROP TABLE IF EXISTS real_estate;
+
 CREATE TABLE real_estate (
   id INT NULL PRIMARY KEY AUTO_INCREMENT,
   type VARCHAR(20) NOT NULL,

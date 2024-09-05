@@ -1,5 +1,8 @@
 const express = require('express');
 const mysql = require('mysql2');
+const util = require('util');
+
+const {vehiclesRouter} = require('./routes/index')
 
 let port = process.env.PORT || 3000;
 
@@ -8,8 +11,8 @@ const connection = mysql.createConnection({
     host: 'localhost',
     port:3306,
     database: 'imy2',
-    user: 'root',
-    password: ''
+    user: 'yakov_admin',
+    password: '1234'
 });
 
 connection.connect(err => {
@@ -20,9 +23,13 @@ connection.connect(err => {
 });
 
 global.connection = connection;
+global.dbQuery = util.promisify(connection.query).bind(connection);
 
 /// create server ///
 const app = express();
+
+/// router ///
+app.use('/api/vehicles',vehiclesRouter)
 
 /// listen port ///
 app.listen(port, () => {
