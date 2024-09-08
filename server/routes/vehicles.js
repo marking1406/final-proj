@@ -3,6 +3,6 @@ const VehiclesController = require('../controller/vehicles');
 
 const vehiclesRouter = new Router();
 
-vehiclesRouter.get('/',VehiclesController.getVehicles)
+vehiclesRouter.get('/',VehiclesController.getVehicle)
 
 module.exports = vehiclesRouter;
