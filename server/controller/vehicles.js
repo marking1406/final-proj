@@ -1,6 +1,6 @@
 module.exports = {
 
-    getVehicles: async ( req, res) => {
+    getVehicle: async ( req, res) => {
         let query = 'SELECT * FROM vehicles';
 
         try{

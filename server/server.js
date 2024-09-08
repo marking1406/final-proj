@@ -29,7 +29,7 @@ global.dbQuery = util.promisify(connection.query).bind(connection);
 const app = express();
 
 /// router ///
-app.use('/api/vehicles',vehiclesRouter)
+app.use('/api/vehicle',vehiclesRouter)
 
 /// listen port ///
 app.listen(port, () => {
