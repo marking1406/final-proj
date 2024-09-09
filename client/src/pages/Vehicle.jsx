@@ -29,12 +29,14 @@ const Cars = () => {
   const [selectedManufacturer, setSelectedManufacturer] = useState('');
   const [selectedType, setSelectedType] = useState('');
 
+
+
   const[vehicleData, setVehicleData] = useState([]);
 
 useEffect (() => {
   const getCars = async () => {
     try{
-      let data = await getData('/Vehicle')
+      let data = await getData('vehicle')
       setVehicleData(data)
     }
     catch (err){
@@ -43,6 +45,10 @@ useEffect (() => {
   }
   getCars();
 },[])
+
+
+
+
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
