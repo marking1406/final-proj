@@ -23,13 +23,13 @@ function Validation (values){
         error.name = ""
        }
 
-    if(values.phoneNumber === ''){
-        error.phoneNumber = 'Phone number should not be empty'
+    if(values.phone_number === ''){
+        error.phone_number = 'Phone number should not be empty'
         }
-        else if(!phoneNumber_pattern.test(values.phoneNumber)){
-        error.phoneNumber =  "phoneNumber didn't match"
+        else if(!phoneNumber_pattern.test(values.phone_number)){
+        error.phone_number =  "phone_number didn't match"
         }else{
-        error.phoneNumber = ""
+        error.phone_number = ""
         }
  
     if(values.password === ''){
