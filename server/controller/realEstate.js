@@ -1,7 +1,7 @@
 module.exports = {
 
-    getUsers: async ( req, res) => {
-        let query = 'SELECT * FROM users';
+    getRealEstate: async ( req, res) => {
+        let query = 'SELECT * FROM real_estate';
 
         try{
 
