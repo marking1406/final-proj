@@ -27,7 +27,7 @@ export default function SignUp() {
     if(errors.name === '' && errors.email === '' && errors.phoneNumber === '' && errors.password === '' ){
       axios.post('http://localhost:3000/signup', values)
       .then(res =>{
-        navigate('/')
+        navigate('/HomePage')
       })
       .catch(err => console.log(err));
     }
