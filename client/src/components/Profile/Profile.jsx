@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 export default function Profile() {
+
+  // const location = useLocation()
   const [isEditing, setIsEditing] = useState(false); 
   const [profile, setProfile] = useState({
     name: 'Hembo Tingor',
@@ -26,6 +29,7 @@ export default function Profile() {
 
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100">
+      {/* <h1>Hello {location.state.id} and welcome to the profile</h1> */}
       <div className="bg-white rounded-lg shadow-md flex w-2/4">
         {/* Left Section */}
         <div className="flex flex-col items-center bg-gradient-to-r from-pink-500 to-orange-500 text-white p-6 rounded-l-lg">

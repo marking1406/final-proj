@@ -3,7 +3,7 @@ const mysql = require('mysql2');
 const util = require('util');
 const cors = require('cors')
 
-const {vehiclesRouter} = require('./routes/index')
+const {vehiclesRouter, usersRouter, realEstateRouter, furnitureRouter} = require('./routes/index')
 
 let port = process.env.PORT || 3000;
 
@@ -29,8 +29,6 @@ global.dbQuery = util.promisify(connection.query).bind(connection);
 /// create server ///
 const app = express();
 
-
-
 app.use(
     cors({
     origin: ['http://localhost:5173','http://localhost:3003','https://class.leonardoschool.co.il','https://www.class.leonardoschool.co.il'],
@@ -38,10 +36,31 @@ app.use(
     credentials: true,
     })
  );
-
+ 
+app.use(express.json())
 
 /// router ///
 app.use('/api/vehicle',vehiclesRouter)
+app.use('/api/users',usersRouter)
+app.use('/api/realEstate',realEstateRouter)
+app.use('/api/furniture',furnitureRouter)
+
+app.post('/signup', (req, res) => {
+    const sql = "INSERT INTO users (name, email, phone_number, password) VALUES (?)";
+    const values = [
+        req.body.name,
+        req.body.email,
+        req.body.phone_number,
+        req.body.password
+    ];
+    connection.query(sql, [values], (err, data) => {
+        if (err) {
+            return res.json('Error');
+        }
+        return res.json(data);
+    });
+});
+
 
 /// listen port ///
 app.listen(port, () => {
