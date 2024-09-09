@@ -1,6 +1,7 @@
 const express = require('express');
 const mysql = require('mysql2');
 const util = require('util');
+const cors = require('cors')
 
 const {vehiclesRouter} = require('./routes/index')
 
@@ -27,6 +28,17 @@ global.dbQuery = util.promisify(connection.query).bind(connection);
 
 /// create server ///
 const app = express();
+
+
+
+app.use(
+    cors({
+    origin: ['http://localhost:5173','http://localhost:3003','https://class.leonardoschool.co.il','https://www.class.leonardoschool.co.il'],
+    methods: ['GET', 'POST','PUT','DELETE', 'PATCH'],
+    credentials: true,
+    })
+ );
+
 
 /// router ///
 app.use('/api/vehicle',vehiclesRouter)
