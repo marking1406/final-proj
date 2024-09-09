@@ -1,17 +1,38 @@
-import React, { useState } from 'react';
-
+import React, { useState, useEffect } from 'react';
+import { getData } from '../util/getData';
 // Sample real estate data
-const realEstateData = [
-  { type: 'Apartment', location: 'Downtown', price: 120000, phone: '050-1234567', image: 'https://via.placeholder.com/150?text=Apartment' },
-  { type: 'House', location: 'Suburb', price: 250000, phone: '050-2345678', image: 'https://via.placeholder.com/150?text=House' },
-  { type: 'Condo', location: 'City Center', price: 180000, phone: '050-3456789', image: 'https://via.placeholder.com/150?text=Condo' },
-  // Add more real estate listings here
-];
+// const realEstateData = [
+//   { type: 'Apartment', location: 'Downtown', price: 120000, phone: '050-1234567', image: 'https://via.placeholder.com/150?text=Apartment' },
+//   { type: 'House', location: 'Suburb', price: 250000, phone: '050-2345678', image: 'https://via.placeholder.com/150?text=House' },
+//   { type: 'Condo', location: 'City Center', price: 180000, phone: '050-3456789', image: 'https://via.placeholder.com/150?text=Condo' },
+//   // Add more real estate listings here
+// ];
 
 const RealEstate = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedLocation, setSelectedLocation] = useState('');
   const [selectedPrice, setSelectedPrice] = useState('');
+
+
+
+  const[realEstateData, setRealEstateData] = useState([]);
+
+  useEffect (() => {
+    const getRealEstates = async () => {
+      try{
+        let data = await getData('realEstate')
+        setRealEstateData(data)
+      }
+      catch (err){
+        console.log(err.message);
+      }
+    }
+    getRealEstates();
+  },[])
+
+
+
+
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
@@ -35,6 +56,14 @@ const RealEstate = () => {
     .filter(item => item.type.toLowerCase().includes(searchTerm.toLowerCase()))
     .filter(item => (selectedLocation ? item.location === selectedLocation : true))
     .filter(item => (selectedPrice ? item.price <= parseInt(selectedPrice) : true));
+
+
+
+    function getImageUrl(imgUrl) {
+      return new URL(imgUrl, import.meta.url).href
+    }
+
+
 
   return (
     <div className="p-6">
@@ -85,7 +114,7 @@ const RealEstate = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {filteredRealEstate.map((item, index) => (
           <div key={index} className="p-4 border border-gray-300 rounded-md flex items-center space-x-4">
-            <img src={item.image} alt={item.type} className="w-32 h-32 object-cover rounded-md" />
+            <img src={getImageUrl(item.image)} alt={item.type} className="w-32 h-32 object-cover rounded-md" />
             <div>
               <h2 className="text-lg font-bold mb-2">{item.type}</h2>
               <p className="mb-1">Location: {item.location}</p>

@@ -14,18 +14,18 @@ CREATE TABLE vehicles (
 );
 
 INSERT INTO vehicles (vehicle, company, model, year, price, type, image) VALUES
-('Car', 'Toyota', 'Corolla', 2020, 85000, 'private', 'https://example.com/toyota-corolla.jpg'),
-('Truck', 'Ford', 'F-150', 2018, 120000, 'leasing', 'https://example.com/ford-f150.jpg'),
-('Motorcycle', 'Harley-Davidson', 'Iron 883', 2019, 75000, 'private', 'https://example.com/harley-iron883.jpg'),
-('Car', 'Honda', 'Civic', 2021, 95000, 'leasing', 'https://example.com/honda-civic.jpg'),
-('Truck', 'Chevrolet', 'Silverado', 2017, 115000, 'private', 'https://example.com/chevy-silverado.jpg'),
-('Motorcycle', 'Yamaha', 'MT-07', 2020, 60000, 'leasing', 'https://example.com/yamaha-mt07.jpg'),
-('Car', 'Mazda', 'CX-5', 2022, 145000, 'private', 'https://example.com/mazda-cx5.jpg'),
-('Car', 'Hyundai', 'Elantra', 2019, 80000, 'leasing', 'https://example.com/hyundai-elantra.jpg'),
-('Truck', 'Ram', '1500', 2021, 130000, 'private', 'https://example.com/ram-1500.jpg'),
-('Motorcycle', 'Ducati', 'Monster 821', 2018, 95000, 'leasing', 'https://example.com/ducati-monster821.jpg'),
-('Car', 'Kia', 'Sportage', 2023, 135000, 'private', 'https://example.com/kia-sportage.jpg'),
-('Truck', 'Nissan', 'Titan', 2019, 125000, 'leasing', 'https://example.com/nissan-titan.jpg');
+('Car', 'Toyota', 'Corolla', 2020, 85000, 'private', '../assets/img/vehicleImg/toyota.jpeg'),
+('Truck', 'Ford', 'F-150', 2018, 120000, 'leasing', '../assets/img/vehicleImg/ford.jpeg'),
+('Motorcycle', 'Harley-Davidson', 'Iron 883', 2019, 75000, 'private', '../assets/img/vehicleImg/Harley-Davidson.jpeg'),
+('Car', 'Honda', 'Civic', 2021, 95000, 'leasing', '../assets/img/vehicleImg/honda.jpeg'),
+('Truck', 'Chevrolet', 'Silverado', 2017, 115000, 'private', '../assets/img/vehicleImg/Chevrolet.jpeg'),
+('Motorcycle', 'Yamaha', 'MT-07', 2020, 60000, 'leasing', '../assets/img/vehicleImg/Yamaha.jpeg'),
+('Car', 'Mazda', 'CX-5', 2022, 145000, 'private', '../assets/img/vehicleImg/Mazda.jpeg'),
+('Car', 'Hyundai', 'Elantra', 2019, 80000, 'leasing', '../assets/img/vehicleImg/Hyundai.jpeg'),
+('Truck', 'Ram', '1500', 2021, 130000, 'private', '../assets/img/vehicleImg/Ram.jpeg'),
+('Motorcycle', 'Ducati', 'Monster 821', 2018, 95000, 'leasing', '../assets/img/vehicleImg/Ducati.jpeg'),
+('Car', 'Kia', 'Sportage', 2023, 135000, 'private', '../assets/img/vehicleImg/Kia.jpeg'),
+('Truck', 'Nissan', 'Titan', 2019, 125000, 'leasing', '../assets/img/vehicleImg/Nissan.jpeg');
 
 --     const carsData = [
 --   { model: 'Toyota Corolla', year: 2020, price: 15000, phone: '050-1234567', company: 'Toyota', type: 'Private Car', image: 'https://via.placeholder.com/150?text=Toyota+Corolla' },

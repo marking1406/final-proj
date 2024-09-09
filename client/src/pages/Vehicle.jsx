@@ -22,6 +22,7 @@ import { getData } from '../util/getData';
 //   { model: 'Chevrolet Express', year: 2021, price: 28000, phone: '050-8901234', manufacturer: 'Chevrolet', type: 'Commercial Vehicle', image: 'https://via.placeholder.com/150?text=Chevrolet+Express' },
 // ];
 
+
 const Cars = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedYear, setSelectedYear] = useState('');
@@ -85,6 +86,15 @@ useEffect (() => {
     .filter(car => (selectedManufacturer ? car.manufacturer === selectedManufacturer : true))
     .filter(car => (selectedType ? car.type === selectedType : true));
 
+
+
+    function getImageUrl(imgUrl) {
+      return new URL(imgUrl, import.meta.url).href
+    }
+
+
+
+
   return (
     <div className="p-6 max-w-4xl mx-auto">
       <div className="mb-4">
@@ -119,11 +129,11 @@ useEffect (() => {
             className="w-full p-2 border border-gray-300 rounded-md"
           >
             <option value="">Select Max Price</option>
-            <option value="30000">30,000 ₪</option>
-            <option value="25000">25,000 ₪</option>
-            <option value="20000">20,000 ₪</option>
-            <option value="15000">15,000 ₪</option>
-            <option value="10000">10,000 ₪</option>
+            <option value="300000">300,000 ₪</option>
+            <option value="200000">200,000 ₪</option>
+            <option value="150000">150,000 ₪</option>
+            <option value="120000">120,000 ₪</option>
+            <option value="80000">80,000 ₪</option>
             {/* Add more prices if needed */}
           </select>
         </div>
@@ -171,10 +181,11 @@ useEffect (() => {
           All Options
         </button>
       </div>
+      
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {filteredCars.map((car, index) => (
           <div key={index} className="p-4 border border-gray-300 rounded-md flex items-center space-x-4">
-            <img src={car.image} alt={car.model} className="w-32 h-32 object-cover rounded-md" />
+            <img src={getImageUrl(car.image)} alt={car.model} className="w-32 h-32 object-cover rounded-md" />
             <div>
               <h2 className="text-lg font-bold mb-2">{car.model}</h2>
               <p className="mb-1">Year: {car.year}</p>
