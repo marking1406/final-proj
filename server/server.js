@@ -46,7 +46,10 @@ app.use('/api/realEstate',realEstateRouter)
 app.use('/api/furniture',furnitureRouter)
 
 app.post('/signup', (req, res) => {
+    console.log("We in the database");
     const sql = "INSERT INTO users (name, email, phone_number, password) VALUES (?)";
+    // console.log(req.body);
+    
     const values = [
         req.body.name,
         req.body.email,
@@ -55,9 +58,33 @@ app.post('/signup', (req, res) => {
     ];
     connection.query(sql, [values], (err, data) => {
         if (err) {
+            console.log(err.message);
             return res.json('Error');
         }
         return res.json(data);
+    });
+});
+
+app.post('/login', (req, res) => {
+    console.log("We in the database");
+    const sql = "SELECT * FROM users WHERE email = ? AND password = ? ";
+    console.log(req.body);
+    const values = [
+        req.body.email,
+        req.body.password
+    ];
+    queryFull = mysql.format(sql,values);
+    // console.log(queryFull);
+    connection.query(queryFull, (err, data) => {
+        if (err) {
+            console.log(err.message);
+            return res.send('Error');
+        }
+        if(data.length > 0){
+            return res.send("Success");
+        }else{
+            return res.send("No data");
+        }
     });
 });
 

@@ -1,5 +1,5 @@
 import './index.css';
-import { Routes, Route, Router } from 'react-router-dom';
+import { Routes, Route, Router, NavLink } from 'react-router-dom';
 import NavBar from './components/NavBar/Navbar.jsx';
 import HomePage from './pages/Homepg.jsx';
 import Vehicle from './pages/Vehicle.jsx';
@@ -14,6 +14,8 @@ import Logout from "./components/Profile/Logout.jsx";
 
 export default function App() {
 
+  const login = window.localStorage.getItem('isLogedIn');
+
   return (
     <div className='app'>
       <NavBar/>
@@ -23,7 +25,15 @@ export default function App() {
         <Route path='/RealEstate' element={<RealEstate/>}/>
         <Route path='/Furniture' element={<Furniture/>}/>
         <Route path='/SignUp' element={<SignUp/>}/>
-        <Route path='/Profile' element={<Profile/>}/>
+        <Route path='/Profile' element={ login ? <Profile/> : 
+        <div className=' size-full flex-col flex justify-center items-center bg-gray-200 my-20 py-20 '>
+          <h1 className='text-red-800 text-4xl'>You shoulde to login please</h1>
+          <button>
+            <NavLink to='/Login' className="text-orange-500 hover:underline ">
+              Login here!
+            </NavLink>
+          </button>
+        </div> }/>
         <Route path='/NewAd' element={<NewAd/>}/>
         <Route path='/Login' element={<Login/>}/>
         <Route path='/Logout' element={<Logout/>}/>
