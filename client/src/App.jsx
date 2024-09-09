@@ -5,11 +5,11 @@ import HomePage from './pages/Homepg.jsx';
 import Vehicle from './pages/Vehicle.jsx';
 import RealEstate from './pages/RealEstate.jsx'
 import Furniture from './pages/Furniture.jsx'
-import SignUp from './pages/SignUp.jsx';
+import SignUp from './components/signUp-login/Signup.jsx';
+import Login from './components/signUp-login/Login.jsx';
 import Profile from './components/Profile/Profile.jsx'
 import NewAd from "./components/Profile/NewAd.jsx";
 import Logout from "./components/Profile/Logout.jsx";
-import Login from './components/Profile/Login.jsx';
 
 
 export default function App() {
