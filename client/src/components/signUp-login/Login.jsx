@@ -1,8 +1,9 @@
 import React from 'react'
+import axios from 'axios'
 import SignUp from './Signup';
 import Validation from './LoginValidation';
 import imgStyleSignUp from '../../assets/img/signpage_style_transparent.png'
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
 export default function Login() {
@@ -12,6 +13,8 @@ export default function Login() {
     password:''
   })
 
+  const navigate = useNavigate()
+
   const [ errors, setErrors ] = useState({})
   
   const handleInput = (e) => {
@@ -20,7 +23,19 @@ export default function Login() {
 
   const handleSubmit = (e) =>{
     e.preventDefault();
+    window.localStorage.setItem('isLogedIn', true)
     setErrors(Validation(values))
+    if( errors.email === '' && errors.password === '' ){
+      axios.post('http://localhost:3000/login', values)
+      .then(res =>{
+        if(res.data === "Success"){
+          navigate('/Profile')
+        }else{
+          alert('No record existed');
+        }
+      })
+      .catch(err => console.log(err));
+    }
   }
 
 
@@ -41,7 +56,7 @@ export default function Login() {
               {errors.email && <span className='text-red-500'>{errors.email}</span>}
             <div className='input rounded-xl border-4 mb-3 px-2 py-2 bg-white'>
               <input type="password" name='password' placeholder='Password'
-              onChange={(e) => {setPassword(e.target.value)}}/>
+              onChange={handleInput}/>
             </div>
               {errors.password && <span className='text-red-500'>{errors.password}</span>}
           </div>  

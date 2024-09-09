@@ -10,7 +10,7 @@ export default function SignUp() {
   const [ values, setValues ] = useState({
     email:'',
     name:'',
-    phoneNumber:'',
+    phone_number:'',
     password:''
   })
 
@@ -24,10 +24,10 @@ export default function SignUp() {
   const handleSubmit = (e) =>{
     e.preventDefault();
     setErrors(Validation(values))
-    if(errors.name === '' && errors.email === '' && errors.phoneNumber === '' && errors.password === '' ){
+    if(errors.name === '' && errors.email === '' && errors.phone_number === '' && errors.password === '' ){
       axios.post('http://localhost:3000/signup', values)
       .then(res =>{
-        navigate('/HomePage')
+        navigate('/Login')
       })
       .catch(err => console.log(err));
     }
@@ -55,7 +55,7 @@ export default function SignUp() {
             </div> 
             {errors.name && <span className='text-red-500'>{errors.name}</span>}
             <div className='input border-4 rounded-xl mb-3 px-2 py-2 bg-white'>
-              <input type="text" name='phoneNumber' placeholder='Phone number' 
+              <input type="text" name='phone_number' placeholder='Phone number' 
               onChange={handleInput}/>
             </div>
             {errors.phoneNumber && <span className='text-red-500'>{errors.phoneNumber}</span>}
