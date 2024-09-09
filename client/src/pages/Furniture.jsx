@@ -1,17 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { getData } from '../util/getData';
 
 // Sample furniture data
-const furnitureData = [
-  { name: 'Sofa', material: 'Leather', price: 800, phone: '050-1234567', image: 'https://via.placeholder.com/150?text=Sofa' },
-  { name: 'Dining Table', material: 'Wood', price: 1200, phone: '050-2345678', image: 'https://via.placeholder.com/150?text=Dining+Table' },
-  { name: 'Bed', material: 'Metal', price: 1000, phone: '050-3456789', image: 'https://via.placeholder.com/150?text=Bed' },
-  // Add more furniture listings here
-];
+// const furnitureData = [
+//   { name: 'Sofa', material: 'Leather', price: 800, phone: '050-1234567', image: 'https://via.placeholder.com/150?text=Sofa' },
+//   { name: 'Dining Table', material: 'Wood', price: 1200, phone: '050-2345678', image: 'https://via.placeholder.com/150?text=Dining+Table' },
+//   { name: 'Bed', material: 'Metal', price: 1000, phone: '050-3456789', image: 'https://via.placeholder.com/150?text=Bed' },
+//   // Add more furniture listings here
+// ];
+
 
 const Furniture = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedMaterial, setSelectedMaterial] = useState('');
   const [selectedPrice, setSelectedPrice] = useState('');
+  const [selectedType, setSelectedType] = useState('');
+  const [selectedLocation, setSelectedLocation] = useState('');
+  const [image, setImage] = useState(''); // לא חובה אם לא משמש בסינון
+  const [furnitureData, setFurnitureData] = useState([]);
+
+  useEffect(() => {
+    const getFurnitureData = async () => {
+      try {
+        let data = await getData('furniture');
+        setFurnitureData(data);
+      } catch (err) {
+        console.log(err.message);
+      }
+    };
+    getFurnitureData();
+  }, []);
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
@@ -25,30 +43,52 @@ const Furniture = () => {
     setSelectedPrice(event.target.value);
   };
 
+  const handleTypeChange = (event) => {
+    setSelectedType(event.target.value);
+  };
+
+  const handleLocationChange = (event) => {
+    setSelectedLocation(event.target.value);
+  };
+
+  const handleImageChange = (event) => {
+    setImage(event.target.value);
+  };
+
   const handleResetFilters = () => {
     setSearchTerm('');
     setSelectedMaterial('');
     setSelectedPrice('');
+    setSelectedType('');
+    setSelectedLocation('');
+    setImage('');
   };
 
   const filteredFurniture = furnitureData
-    .filter(item => item.name.toLowerCase().includes(searchTerm.toLowerCase()))
     .filter(item => (selectedMaterial ? item.material === selectedMaterial : true))
-    .filter(item => (selectedPrice ? item.price <= parseInt(selectedPrice) : true));
+    .filter(item => (selectedPrice ? item.price <= parseInt(selectedPrice) : true))
+    .filter(item => (selectedType ? item.type === selectedType : true))
+    .filter(item => (selectedLocation ? item.location === selectedLocation : true))
+    .filter(item => (image ? item.image.includes(image) : true));
+
+    function getImageUrl(imgUrl) {
+      return new URL(imgUrl, import.meta.url).href
+    }
+
 
   return (
     <div className="p-6">
       <div className="mb-4">
         <input
           type="text"
-          placeholder="Search by name..."
+          placeholder="Search by image URL..."
           value={searchTerm}
           onChange={handleSearch}
           className="w-full p-2 border border-gray-300 rounded-md"
         />
       </div>
       <div className="flex gap-4 mb-6 items-center">
-        <div className="w-1/3">
+        <div className="w-1/5">
           <select
             value={selectedMaterial}
             onChange={handleMaterialChange}
@@ -61,7 +101,7 @@ const Furniture = () => {
             {/* Add more materials if needed */}
           </select>
         </div>
-        <div className="w-1/3">
+        <div className="w-1/5">
           <select
             value={selectedPrice}
             onChange={handlePriceChange}
@@ -75,22 +115,57 @@ const Furniture = () => {
             {/* Add more prices if needed */}
           </select>
         </div>
+        <div className="w-1/5">
+          <select
+            value={selectedType}
+            onChange={handleTypeChange}
+            className="w-full p-2 border border-gray-300 rounded-md"
+          >
+            <option value="">Select Type</option>
+            <option value="Chair">Chair</option>
+            <option value="Table">Table</option>
+            <option value="Sofa">Sofa</option>
+            {/* Add more types if needed */}
+          </select>
+        </div>
+        <div className="w-1/5">
+          <select
+            value={selectedLocation}
+            onChange={handleLocationChange}
+            className="w-full p-2 border border-gray-300 rounded-md"
+          >
+            <option value="">Select Location</option>
+            <option value="Living Room">Living Room</option>
+            <option value="Bedroom">Bedroom</option>
+            <option value="Office">Office</option>
+            {/* Add more locations if needed */}
+          </select>
+        </div>
+        <div className="w-1/5">
+          <input
+            type="text"
+            placeholder="Search by image URL..."
+            value={image}
+            onChange={handleImageChange}
+            className="w-full p-2 border border-gray-300 rounded-md"
+          />
+        </div>
         <button
           onClick={handleResetFilters}
-          className="w-1/3 p-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+          className="w-1/5 p-2 bg-red-500 text-white rounded-md hover:bg-red-600"
         >
-          All Options
+          Reset Filters
         </button>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {filteredFurniture.map((item, index) => (
           <div key={index} className="p-4 border border-gray-300 rounded-md flex items-center space-x-4">
-            <img src={item.image} alt={item.name} className="w-32 h-32 object-cover rounded-md" />
+            <img src={getImageUrl(item.image)} alt={item.type} className="w-32 h-32 object-cover rounded-md" />
             <div>
-              <h2 className="text-lg font-bold mb-2">{item.name}</h2>
               <p className="mb-1">Material: {item.material}</p>
               <p className="mb-1">Price: {item.price} ₪</p>
-              <p>Phone: {item.phone}</p>
+              <p className="mb-1">Type: {item.type}</p>
+              <p className="mb-1">Location: {item.location}</p>
             </div>
           </div>
         ))}
