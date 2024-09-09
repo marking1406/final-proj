@@ -7,7 +7,8 @@ CREATE TABLE furniture (
   material VARCHAR(30) NOT NULL,
   price INT NOT NULL,
   location VARCHAR(50) NOT NULL,
-  image VARCHAR(250) NULL
+  image VARCHAR(250) NULL,
+  description VARCHAR(200) NOT NULL
 );
 
 INSERT INTO furniture (type, material, price, location, image) VALUES

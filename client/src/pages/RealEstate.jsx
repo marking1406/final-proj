@@ -12,6 +12,7 @@ const RealEstate = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedLocation, setSelectedLocation] = useState('');
   const [selectedPrice, setSelectedPrice] = useState('');
+  const [selectedProperty, setSelectedProperty] = useState(null); // For popup
 
 
 
@@ -52,6 +53,14 @@ const RealEstate = () => {
     setSelectedPrice('');
   };
 
+  const handleShowDetails = (property) => {
+    setSelectedProperty(property);
+  };
+
+  const handleClosePopup = () => {
+    setSelectedProperty(null);
+  };
+
   const filteredRealEstate = realEstateData
     .filter(item => item.type.toLowerCase().includes(searchTerm.toLowerCase()))
     .filter(item => (selectedLocation ? item.location === selectedLocation : true))
@@ -67,6 +76,7 @@ const RealEstate = () => {
 
   return (
     <div className="p-6">
+      {/* Filters */}
       <div className="mb-4">
         <input
           type="text"
@@ -111,6 +121,8 @@ const RealEstate = () => {
           All Options
         </button>
       </div>
+
+      {/* Real Estate Listings */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {filteredRealEstate.map((item, index) => (
           <div key={index} className="p-4 border border-gray-300 rounded-md flex items-center space-x-4">
@@ -121,9 +133,36 @@ const RealEstate = () => {
               <p className="mb-1">Price: {item.price} ₪</p>
               <p>Phone: {item.phone}</p>
             </div>
+            <button
+              onClick={() => handleShowDetails(item)}
+              className="p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+            >
+              Details
+            </button>
           </div>
         ))}
       </div>
+      {selectedProperty && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-96">
+            <h2 className="text-lg font-bold mb-4">{selectedProperty.type}</h2>
+            <img
+              src={selectedProperty.image}
+              alt={selectedProperty.type}
+              className="w-full h-64 object-cover mb-4"
+            />
+            <p className="mb-2">Location: {selectedProperty.location}</p>
+            <p className="mb-2">Price: {selectedProperty.price} ₪</p>
+            <p className="mb-2">Phone: {selectedProperty.phone}</p>
+            <button
+              onClick={handleClosePopup}
+              className="mt-4 p-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
