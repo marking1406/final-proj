@@ -88,6 +88,29 @@ app.post('/login', (req, res) => {
     });
 });
 
+app.get('/edit/:id', (req,res) => {
+    const sql ='SELECT * FORM users WHERE id = ?';
+    const id = req.params.id;
+    connection.query(sql,[id], (err,result) => {
+        if(err) return res.send(err);
+        return res.send(result)
+    })
+})
+
+app.put('/update/:id',(req,res) => {
+    const sql = 'UPDARE users SET email = ?, name = ?, phone_number = ?';
+    const id = req.params.id;
+    const values = [
+        req.body.name,
+        req.body.email,
+        req.body.phone_number
+    ];
+    connection.query(sql, [values,id], (err, result) => {
+        if(err) return res.send(err)
+            return res.json({updated:true})
+    })
+    
+})
 
 /// listen port ///
 app.listen(port, () => {
