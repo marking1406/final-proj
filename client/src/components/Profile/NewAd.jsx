@@ -133,6 +133,14 @@ export default function NewAd() {
               onChange={handleInputChange}
               className="border border-gray-300 rounded-md mb-4 p-2 w-full"
             />
+             <input
+              type="text"
+              name="description"
+              placeholder="description"
+              value={formData.address || ''}
+              onChange={handleInputChange}
+              className="border border-gray-300 rounded-md mb-4 p-2 w-full"
+            />
             <input
               type="file"
               name="image"
@@ -181,6 +189,22 @@ export default function NewAd() {
               name="location"
               placeholder="Location"
               value={formData.location || ''}
+              onChange={handleInputChange}
+              className="border border-gray-300 rounded-md mb-4 p-2 w-full"
+            />
+             <input
+              type="text"
+              name="area"
+              placeholder="Area"
+              value={formData.area || ''}
+              onChange={handleInputChange}
+              className="border border-gray-300 rounded-md mb-4 p-2 w-full"
+            />
+             <input
+              type="text"
+              name="description"
+              placeholder="Description"
+              value={formData.description || ''}
               onChange={handleInputChange}
               className="border border-gray-300 rounded-md mb-4 p-2 w-full"
             />
