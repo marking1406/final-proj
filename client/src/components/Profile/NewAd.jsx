@@ -133,6 +133,14 @@ export default function NewAd() {
               onChange={handleInputChange}
               className="border border-gray-300 rounded-md mb-4 p-2 w-full"
             />
+             <input
+              type="text"
+              name="description"
+              placeholder="description"
+              value={formData.address || ''}
+              onChange={handleInputChange}
+              className="border border-gray-300 rounded-md mb-4 p-2 w-full"
+            />
             <input
               type="file"
               name="image"

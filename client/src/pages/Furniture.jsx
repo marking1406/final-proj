@@ -173,6 +173,7 @@ const Furniture = () => {
             />
             <p className="mb-2">Material: {selectedFurniture.material}</p>
             <p className="mb-2">Price: {selectedFurniture.price} ₪</p>
+            <p className="mb-1">location: {selectedFurniture.location}</p>
             <p className="mb-2">Description: {selectedFurniture.description}</p>
             <button
               onClick={handleClosePopup}

@@ -161,6 +161,7 @@ const RealEstate = () => {
             />
             <p className="mb-2">Location: {selectedProperty.city}</p>
             <p className="mb-2">Price: {selectedProperty.price} ₪</p>
+            <p className='mb-2'>address: {selectedProperty.address}</p>
             <p className="mb-2">description: {selectedProperty.description}</p>
             <button
               onClick={handleClosePopup}
