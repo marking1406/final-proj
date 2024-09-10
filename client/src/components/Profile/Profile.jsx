@@ -1,117 +1,78 @@
-import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import EditIcon from '@mui/icons-material/Edit';
+import axios from 'axios';
 
 export default function Profile() {
 
-  // const location = useLocation()
-  const [isEditing, setIsEditing] = useState(false); 
-  const [profile, setProfile] = useState({
-    name: 'Hembo Tingor',
-    email: 'rntng@gmail.com',
-    phone: '9897998989',
-  });
+  const [email, setEmail] = useState('yakov@gmail.com');
+  const [name, setName] = useState('yakov');
+  const [phone_number, setPhoneNumber] = useState('0546080824');
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setProfile({
-      ...profile,
-      [name]: value,
-    });
-  };
+  const { id } = useParams();
 
-  const toggleEdit = () => {
-    setIsEditing(!isEditing);
-  };
+  useEffect(() => {
+    axios.get(`http://localhost:3000/edit/${id}`) 
+      .then(res => {
+        const user = res.data[0];
+        setName(user.name);
+        setEmail(user.email);
+        setPhoneNumber(user.phone_number);
+      })
+      .catch(err => console.log(err));
+    }, [id]); 
 
-  const saveProfile = () => {
-    setIsEditing(false); 
-  };
+     const [isEditing, setIsEditing] = useState(false);
+
+    const handleEditClick = () => {
+        setIsEditing(!isEditing);
+    };  
+
+    const navigate = useNavigate(); 
+
+    const handleSubmit = (e) => {
+    e.preventDefault();
+    axios.put(`http://localhost:3000/updated/${id}`, { email, name, phone_number }) // Corrected URL
+      .then(res => {
+        if (res.data.updated) {
+          navigate('/Profile'); // Redirect to the homepage after successful update
+        } else {
+          alert('Not updated');
+        }
+        })
+       .catch(err => console.log(err)); // Added catch to handle errors
+       setIsEditing(false);
+    };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
-      {/* <h1>Hello {location.state.id} and welcome to the profile</h1> */}
-      <div className="bg-white rounded-lg shadow-md flex w-2/4">
-        {/* Left Section */}
-        <div className="flex flex-col items-center bg-gradient-to-r from-pink-500 to-orange-500 text-white p-6 rounded-l-lg">
-          <img 
-            src="https://via.placeholder.com/100" 
-            alt="Profile" 
-            className="rounded-full w-24 h-24 mb-4" 
-          />
-          <h2 className="text-xl font-semibold">{profile.name}</h2>
+    <form onSubmit={handleSubmit}>  
+     <div className='max-h-full max-w-full'>
+      <div className='max-h-full max-w-full flex flex-col items-center justify-center'>
+        <h1 className='mt-32 mb-20 text-5xl font-extrabold text-red-800'>My Profile:</h1>
+        <div>
+          <button className='block absolute mt-2 ml-28' type="button" 
+            onClick={handleEditClick}>
+            <EditIcon className='text-gray-800'/>
+          </button>
         </div>
-
-        {/* Right Section */}
-        <div className="p-6 flex-1">
-          <h2 className="text-lg font-semibold mb-2">Information</h2>
-          <hr className="my-4" />
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <p className="font-medium">Email</p>
-              {isEditing ? (
-                <input
-                  type="email"
-                  name="email"
-                  value={profile.email}
-                  onChange={handleChange}
-                  className="border rounded-md p-2"
-                />
-              ) : (
-                <p className="text-gray-600">{profile.email}</p>
-              )}
-            </div>
-            <div>
-              <p className="font-medium">Phone</p>
-              {isEditing ? (
-                <input
-                  type="text"
-                  name="phone"
-                  value={profile.phone}
-                  onChange={handleChange}
-                  className="border rounded-md p-2"
-                />
-              ) : (
-                <p className="text-gray-600">{profile.phone}</p>
-              )}
-            </div>
+        <div className=' border-4 py-16 px-16 rounded-xl shadow-xl bg-gray-200'>
+          <div className='mb-4'>
+            <h2 className='text-2xl text-red-800 font-bold'>Email:</h2>{isEditing ? (<input type="email"value={email}
+                onChange={e => setEmail(e.target.value)}/>) : (<p>{email}</p>)}
           </div>
-          <h2 className="text-lg font-semibold mb-2 mt-8">Posts</h2>
-          <hr className="my-4" />
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <p className="font-medium">Recent</p>
-              <p className="text-gray-600">Sam Disuja</p>
-            </div>
+          <div className='mb-4'>
+            <h2 className='text-lg text-red-800 font-bold'>Name:</h2>{isEditing ? (<input type="text" value={name}
+                onChange={e => setName(e.target.value)}/>) : (<p>{name}</p>)}
           </div>
-
-          <div className="mt-4">
-            {isEditing ? (
-              <div>
-                <button
-                  onClick={saveProfile}
-                  className="text-blue-500 mr-4"
-                >
-                  Save
-                </button>
-                <button
-                  onClick={toggleEdit}
-                  className="text-gray-500"
-                >
-                  Cancel
-                </button>
-              </div>
-            ) : (
-              <a
-                href="#"
-                onClick={toggleEdit}
-                className="text-blue-500"
-              >
-                Edit Profile
-              </a>
-            )}
+          <div className='mb-4'>
+            <h2 className='text-lg text-red-800 font-bold'>Phone Number:</h2>{isEditing ? (<input type="text"value={phone_number}
+            onChange={e => setPhoneNumber(e.target.value)}/> ) : (<p>{phone_number}</p>)}
           </div>
         </div>
+        {isEditing && <button type="submit">Update</button>} {/* Submit button for updating */}
       </div>
-    </div>
+
+     </div>
+    </form>
   );
 }

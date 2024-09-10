@@ -50,7 +50,7 @@ export default function Navbar() {
           <NavLink to='/SignUp'>SignUp</NavLink>
         </li>
         <li onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} style={{width:'80px',textAlign:'center'}}>
-          <NavLink to='/Profile'><AccountCircleIcon/></NavLink>
+        <NavLink to='/Profile'> <AccountCircleIcon/> </NavLink>
           {dropDown && <ProfDropDown/>}
         </li>
       </ul>

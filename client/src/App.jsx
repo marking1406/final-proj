@@ -9,7 +9,6 @@ import SignUp from './components/signUp-login/Signup.jsx';
 import Login from './components/signUp-login/Login.jsx';
 import Profile from './components/Profile/Profile.jsx'
 import NewAd from "./components/Profile/NewAd.jsx";
-import Logout from "./components/Profile/Logout.jsx";
 
 
 export default function App() {
@@ -27,16 +26,15 @@ export default function App() {
         <Route path='/SignUp' element={<SignUp/>}/>
         <Route path='/Profile' element={ login ? <Profile/> : 
         <div className=' size-full flex-col flex justify-center items-center bg-gray-200 my-20 py-20 '>
-          <h1 className='text-red-800 text-4xl'>You shoulde to login please</h1>
+          <h1 className='text-red-800 text-4xl'>You shoulde to login</h1>
           <button>
-            <NavLink to='/Login' className="text-orange-500 hover:underline ">
+            <NavLink to='/Login' className="text-orange-800 hover:underline ">
               Login here!
             </NavLink>
           </button>
         </div> }/>
         <Route path='/NewAd' element={<NewAd/>}/>
         <Route path='/Login' element={<Login/>}/>
-        <Route path='/Logout' element={<Logout/>}/>
       </Routes>
     </div>
   )
