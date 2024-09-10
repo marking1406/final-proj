@@ -181,16 +181,19 @@ const Cars = () => {
         <p className="mb-1">Price: {car.price} ₪</p>
         <p className="mb-1">Type: {car.vehicle}</p>
         <p>Manufacturer: {car.company}</p>
-        <button
-          onClick={() => handleShowDetails(car)}
-          className="mt-2 p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-        >
-          Show More
-        </button>
       </div>
+      
+      {/* Details Button */}
+      <button
+        onClick={() => handleShowDetails(car)}
+        className="p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+      >
+        Details
+      </button>
     </div>
   ))}
 </div>
+
 
       {/* Popup for Details */}
       {selectedVehicle && (
