@@ -79,7 +79,7 @@ const Cars = () => {
   }
 
   return (
-    <div className="p-6 max-w-4xl mx-auto">
+    <div className="p-6"> {/* Removed max-w-4xl and mx-auto */}
       {/* Search */}
       <div className="mb-4">
         <input
@@ -165,25 +165,32 @@ const Cars = () => {
 
       {/* Car Listings */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {filteredCars.map((car, index) => (
-          <div key={index} className="p-4 border border-gray-300 rounded-md flex flex-col items-start space-y-4">
-            <img src={getImageUrl(car.image)} alt={car.model} className="w-32 h-32 object-cover rounded-md" />
-            <div>
-              <h2 className="text-lg font-bold mb-2">{car.model}</h2>
-              <p className="mb-1">Year: {car.year}</p>
-              <p className="mb-1">Price: {car.price} ₪</p>
-              <p className="mb-1">Type: {car.vehicle}</p>
-              <p>Manufacturer: {car.company}</p>
-            </div>
-            <button
-              onClick={() => handleShowDetails(car)}
-              className="mt-2 p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-            >
-              Show More
-            </button>
-          </div>
-        ))}
+  {filteredCars.map((car, index) => (
+    <div key={index} className="p-4 border border-gray-300 rounded-md flex items-center space-x-4">
+      {/* Car Image */}
+      <img
+        src={getImageUrl(car.image)}
+        alt={car.model}
+        className="w-32 h-32 object-cover rounded-md"
+      />
+      
+      {/* Car Text */}
+      <div className="flex-1">
+        <h2 className="text-lg font-bold mb-2">{car.model}</h2>
+        <p className="mb-1">Year: {car.year}</p>
+        <p className="mb-1">Price: {car.price} ₪</p>
+        <p className="mb-1">Type: {car.vehicle}</p>
+        <p>Manufacturer: {car.company}</p>
+        <button
+          onClick={() => handleShowDetails(car)}
+          className="mt-2 p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+        >
+          Show More
+        </button>
       </div>
+    </div>
+  ))}
+</div>
 
       {/* Popup for Details */}
       {selectedVehicle && (
